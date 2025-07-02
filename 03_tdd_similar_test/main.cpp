@@ -1,60 +1,30 @@
 #include "gmock/gmock.h"
 #include "similarity-checker.cpp"
 
-TEST(SimilarityChecker, LengthSame) {
-    SimilarityChecker sc{ "ASD" };
+class CheckerFixture : public testing::Test {
+public:
+    SimilarityChecker sc;
+    void checkLength(const string& solution, const string& input, int score) {
+        sc.setSolution(solution);
 
-    double actual = sc.check("DSA");
+        EXPECT_EQ(score, sc.check(input));
+    }
+};
 
-    EXPECT_EQ(60, actual);
+TEST_F(CheckerFixture, LengthSame) {
+    checkLength("ASD", "DSA", 60);
+    checkLength("ASDF", "DSAB", 60);
 }
 
-TEST(SimilarityChecker, LengthSame2) {
-    SimilarityChecker sc{ "ASDF" };
-
-    double actual = sc.check("DSAB");
-
-    EXPECT_EQ(60, actual);
+TEST_F(CheckerFixture, LengthDouble) {
+    checkLength("A", "BB", 0);
+    checkLength("AA", "BBBBB", 0);
+    checkLength("CCCAAAAA", "ED", 0);
 }
 
-TEST(SimilarityChecker, LengthDouble) {
-    SimilarityChecker sc{ "A" };
-
-    double actual = sc.check("BB");
-
-    EXPECT_EQ(0, actual);
-}
-
-TEST(SimilarityChecker, LengthDouble2) {
-    SimilarityChecker sc{ "AA" };
-
-    double actual = sc.check("BBBBB");
-
-    EXPECT_EQ(0, actual);
-}
-
-TEST(SimilarityChecker, LengthDouble3) {
-    SimilarityChecker sc{ "CCCAAAAA" };
-
-    double actual = sc.check("ED");
-
-    EXPECT_EQ(0, actual);
-}
-
-TEST(SimilarityChecker, LengthPartialScore1) {
-    SimilarityChecker sc{ "AAABB" };
-
-    int actual = sc.check("BAA");
-
-    EXPECT_EQ(20, actual);
-}
-
-TEST(SimilarityChecker, LengthPartialScore2) {
-    SimilarityChecker sc{ "AA" };
-
-    int actual = sc.check("AAE");
-
-    EXPECT_EQ(30, actual);
+TEST_F(CheckerFixture, LengthPartialScore) {
+    checkLength("AAABB", "BAA", 20);
+    checkLength("AA", "AAE", 30);
 }
 
 int main() {
