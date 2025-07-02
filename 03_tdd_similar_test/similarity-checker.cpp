@@ -1,5 +1,4 @@
 #include <string>
-#include <cstdlib>
 
 using namespace std;
 
@@ -14,7 +13,7 @@ public:
 
         if (isDoubleLength(solutionLength, inputLength)) { return 0; }
 
-        double score = calculateScore(solutionLength, inputLength);
+        double score = calculateLengthScore(solutionLength, inputLength);
 
         return score;
     }
@@ -26,7 +25,7 @@ public:
 private:
     string solution;
 
-    double calculateScore(int solutionLength, int inputLength) {
+    double calculateLengthScore(int solutionLength, int inputLength) {
         double gap = 0.0;
         double result = 0.0;
         if (solutionLength > inputLength) {
