@@ -1,4 +1,5 @@
 #include <string>
+#include <set>
 
 using namespace std;
 
@@ -7,7 +8,7 @@ public:
     SimilarityChecker() {}
     SimilarityChecker(string solution) : solution{ solution } {}
 
-    int check(const string& input) {
+    int getLengthScore(const string& input) {
         int solutionLength = solution.length();
         int inputLength = input.length();
 
@@ -16,6 +17,23 @@ public:
         double score = calculateLengthScore(solutionLength, inputLength);
 
         return score;
+    }
+
+    int getAlphabetScore(const string& input) {
+        set<char> solutionSet;
+        set<char> inputSet;
+
+        for (auto ch : solution) {
+            solutionSet.insert(ch);
+        }
+
+        for (auto ch : input) {
+            inputSet.insert(ch);
+        }
+        
+        if (solutionSet == inputSet) return 40;
+
+        return 0;
     }
 
     void setSolution(const string& input) {
