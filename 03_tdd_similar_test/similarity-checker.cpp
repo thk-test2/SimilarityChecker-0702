@@ -11,23 +11,29 @@ public:
         int sl = solution.length();
         int il = input.length();
 
-        if (sl >= il * 2 || il >= sl * 2) {
-            return 0;
-        }
+        if (isDoubleLength(sl, il)) { return 0; }
 
+        double score = calculateScore(sl, il);
+
+        return score;
+    }
+
+    double calculateScore(int sl, int il) {
         double gap = 0.0;
-        double score = 0;
-
+        double result = 0.0;
         if (sl > il) {
             gap = sl - il;
-            score = (1 - gap / il) * 60.0;
+            result = (1 - gap / il) * 60.0;
         }
         else {
             gap = il - sl;
-            score = (1 - gap / sl) * 60.0;
+            result = (1 - gap / sl) * 60.0;
         }
+        return result;
+    }
 
-        return score;
+    bool isDoubleLength(int sl, int il) {
+        return sl >= il * 2 || il >= sl * 2;
     }
 
 private:
