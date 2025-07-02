@@ -7,7 +7,7 @@ class SimilarityChecker {
 public:
     SimilarityChecker(string solution) : solution{ solution } {}
 
-    double check(const string& input) {
+    int check(const string& input) {
         int sl = solution.length();
         int il = input.length();
 
@@ -15,7 +15,7 @@ public:
             return 0;
         }
 
-        int gap = 0;
+        double gap = 0.0;
         double score = 0;
 
         if (sl > il) {

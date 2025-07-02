@@ -41,6 +41,22 @@ TEST(SimilarityChecker, LengthDouble3) {
     EXPECT_EQ(0, actual);
 }
 
+TEST(SimilarityChecker, LengthPartialScore1) {
+    SimilarityChecker sc{ "AAABB" };
+
+    int actual = sc.check("BAA");
+
+    EXPECT_EQ(20, actual);
+}
+
+TEST(SimilarityChecker, LengthPartialScore2) {
+    SimilarityChecker sc{ "AA" };
+
+    int actual = sc.check("AAE");
+
+    EXPECT_EQ(30, actual);
+}
+
 int main() {
     ::testing::InitGoogleMock();
     return RUN_ALL_TESTS();
