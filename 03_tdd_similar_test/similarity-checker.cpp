@@ -1,4 +1,5 @@
 #include <string>
+#include <cstdlib>
 
 using namespace std;
 
@@ -7,9 +8,12 @@ public:
     SimilarityChecker(string solution) : solution{ solution } {}
 
     int check(const string& input) {
-        if (input.length() == solution.length()) {
-            return 60;
-        }
+        int sl = solution.length();
+        int il = input.length();
+
+        int gap = sl > il ? sl - il : il - sl;
+        if (gap == 0) return 60;
+
         return 0;
     }
 
