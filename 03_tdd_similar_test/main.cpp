@@ -4,7 +4,7 @@
 TEST(SimilarityChecker, LengthSame) {
     SimilarityChecker sc{ "ASD" };
 
-    int actual = sc.check("DSA");
+    double actual = sc.check("DSA");
 
     EXPECT_EQ(60, actual);
 }
@@ -12,7 +12,7 @@ TEST(SimilarityChecker, LengthSame) {
 TEST(SimilarityChecker, LengthSame2) {
     SimilarityChecker sc{ "ASDF" };
 
-    int actual = sc.check("DSAB");
+    double actual = sc.check("DSAB");
 
     EXPECT_EQ(60, actual);
 }
